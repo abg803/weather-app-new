@@ -33,6 +33,9 @@ function App() {
               <Search/>
               <CurrentWeather
                 icon={`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
+                cityName={data.name}
+                weekDay={"Some day"}
+                time={"Some Hour"}
               />
             </div>
             <SevenDayForecast/>
