@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
 import Footer from './Footer';
-import CurrentLocation from './CurrentLocation';
+import CurrentWeather from './CurrentWeather';
 import SevenDayForecast from './SevenDayForecast';
 import Search from './Search';
 
@@ -21,26 +21,33 @@ function App() {
       .get(apiUrl)
       .then(response => {
         // 3. set the data to a state
-        setData(response)
+        setData(response.data)
       });
   }, [])
 
   return (
-    <div className="App">
+      <div className="container">
+        {!!data ?
+          <>
+            <div className="d-flex bd-highlight flex-wrap">
+              <Search/>
+              <CurrentWeather
+                icon={`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
+              />
+            </div>
+            <SevenDayForecast/>
 
-      <Search/>
-      <CurrentLocation/>
-      <SevenDayForecast/>
-
-
-    
-      <pre>
-       {JSON.stringify(data, null, 2)} 
-      </pre>
-    
-      <Footer/>
-    
-    </div>
+            <pre>
+            {JSON.stringify(data, null, 2)} 
+            </pre>
+          
+            <Footer/>
+          </>
+        :
+        <p>loading...</p>
+      }
+      
+      </div>
   )
 }
 
