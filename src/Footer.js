@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useEffect} from "react";
 
 function Footer() {
+    useEffect(() => {
+        console.log('mounted footer')
+    
+        return () => {
+          console.log('unmounted footer')
+        }
+      }, [])
+
     return (
         <p>
         <a href="https://github.com/abg803/weather-app-new" target="_blank">
